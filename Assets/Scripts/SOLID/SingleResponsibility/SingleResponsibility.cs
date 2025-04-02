@@ -1,18 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class SingleResponsibility : MonoBehaviour
+namespace SOLID.SingleResponsibility
 {
-    private void Start()
+    public class SingleResponsibility : MonoBehaviour
     {
-        Square square = new Square(5);
-        Circle circle = new Circle(3);
+        // A class should have one and only one reason to change
+        // Each class should have a single responsibility and focus on only one functionality.
+        private void Start()
+        {
+            Square square = new Square(4);
+            Circle circle = new Circle(10);
 
-        AreaCalculator areaCalculator = new AreaCalculator();
+            ShapeAreaCalculator shapeAreaCalculator = new ShapeAreaCalculator();
 
-        Debug.Log("Area = " + areaCalculator.CalculateArea(square));
-        Debug.Log("Area = " + areaCalculator.CalculateArea(circle));
+            print("Area = " + shapeAreaCalculator.CalculateArea(square));
+            print("Area = " + shapeAreaCalculator.CalculateArea(circle));
+        }
     }
 
     public abstract class Shape
@@ -49,7 +52,7 @@ public class SingleResponsibility : MonoBehaviour
         }
     }
 
-    public class AreaCalculator
+    public class ShapeAreaCalculator
     {
         public float CalculateArea(Shape shape)
         {

@@ -1,22 +1,25 @@
 using UnityEngine;
 
-public class Inheritance : MonoBehaviour
+namespace OOP.Inheritance
 {
-    // Allows reuse of common properties and methods without rewriting them.
-    // Improves modularity and extensibility
-    // Allows the creation of new abstractions based on existing ones
-
-    private void Start()
+    public class Inheritance : MonoBehaviour
     {
-        Enemy enemy = new Enemy();
-        Alien alien = new Alien();
-        Monster monster = new Monster();
-        enemy.Die();
-        alien.Die();
-        monster.Die();
+        // Allows reuse of common properties and methods without rewriting them.
+        // Improves modularity and extensibility
+        // Allows the creation of new abstractions based on existing ones
+
+        private void Start()
+        {
+            Enemy enemy = new Enemy();
+            Alien alien = new Alien();
+            Monster monster = new Monster();
+            enemy.Die();
+            alien.Die();
+            monster.Die();
+        }
     }
 
-    private class Enemy
+    public class Enemy
     {
         public virtual void Die()
         {
@@ -24,7 +27,7 @@ public class Inheritance : MonoBehaviour
         }
     }
 
-    private class Alien : Enemy
+    public class Alien : Enemy
     {
         public override void Die()
         {
@@ -32,7 +35,7 @@ public class Inheritance : MonoBehaviour
         }
     }
 
-    private class Monster : Enemy
+    public class Monster : Enemy
     {
         public override void Die()
         {

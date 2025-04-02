@@ -1,21 +1,24 @@
 using UnityEngine;
 
-public class Abstraction : MonoBehaviour
+namespace OOP.Abstraction
 {
-    //Abstraction aims to hide unnecessary details and only provide the necessary information.
-    //It allows building large systems without increasing code complexity or understanding.
-    private void Start()
+    public class Abstraction : MonoBehaviour
     {
-        CharacterDataBuilder characterDataBuilder = new CharacterDataBuilder();
-        var data = characterDataBuilder.GetCharacterData();
-        Character character = new Character(data);
-        var characterStat = character.GetCharacterStat();
-        print(characterStat.HP);
-        print(characterStat.ATK);
-        print(characterStat.DEF);
+        //Abstraction aims to hide unnecessary details and only provide the necessary information.
+        //It allows building large systems without increasing code complexity or understanding.
+        private void Start()
+        {
+            CharacterDataBuilder characterDataBuilder = new CharacterDataBuilder();
+            var data = characterDataBuilder.GetCharacterData();
+            Character character = new Character(data);
+            var characterStat = character.GetCharacterStat();
+            print(characterStat.HP);
+            print(characterStat.ATK);
+            print(characterStat.DEF);
+        }
     }
 
-    private class Character
+    public class Character
     {
         private Stat myStat;
 
@@ -30,7 +33,7 @@ public class Abstraction : MonoBehaviour
         }
     }
 
-    private class CharacterDataBuilder
+    public class CharacterDataBuilder
     {
         private Stat stat;
 
@@ -59,7 +62,7 @@ public class Abstraction : MonoBehaviour
         }
     }
 
-    private struct Stat
+    public struct Stat
     {
         public int HP;
         public int ATK;
