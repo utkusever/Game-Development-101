@@ -21,50 +21,50 @@ namespace SOLID.LiskovSubstitution
             }
         }
     }
-}
-// Every weapon is not reloadable!
+    // Every weapon is not reloadable!
 // public abstract class Weapon
 // {
 //     public abstract void Attack();
 //     public abstract void Reload();
 // }
 
-public abstract class Weapon
-{
-    public abstract void Attack();
-}
-
-public abstract class FireArm : Weapon
-{
-    public override void Attack()
+    public abstract class Weapon
     {
+        public abstract void Attack();
     }
 
-    public abstract void Reload();
-}
-
-public class Pistol : FireArm
-{
-    public override void Attack()
+    public abstract class FireArm : Weapon
     {
-        Debug.Log("pew pew");
+        public override void Attack()
+        {
+        }
+
+        public abstract void Reload();
     }
 
-    public override void Reload()
+    public class Pistol : FireArm
     {
-        Debug.Log("pistol reloading");
-    }
-}
+        public override void Attack()
+        {
+            Debug.Log("pew pew");
+        }
 
-public class Knife : Weapon
-{
-    public override void Attack()
-    {
-        Debug.Log("swing");
+        public override void Reload()
+        {
+            Debug.Log("pistol reloading");
+        }
     }
-    // Knife can't reloadable
-    // public override void Reload()
-    // {
-    //     Debug.Log("WHAT????");
-    // }
+
+    public class Knife : Weapon
+    {
+        public override void Attack()
+        {
+            Debug.Log("swing");
+        }
+        // Knife can't reloadable
+        // public override void Reload()
+        // {
+        //     Debug.Log("WHAT????");
+        // }
+    }
 }
