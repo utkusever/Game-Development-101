@@ -19,7 +19,7 @@ Contents
     - [Interface Segregation](https://github.com/utkusever/Game-Development-101/blob/main/Assets/Scripts/SOLID/InterfaceSegregation/InterfaceSegregation.cs)
     - [Dependency Inversion](https://github.com/utkusever/Game-Development-101/blob/main/Assets/Scripts/SOLID/DependencyInversion/DependencyInversion.cs)
 
-  - Design Patterns
+- Design Patterns
 
     - [Object Pool](https://github.com/utkusever/Game-Development-101/tree/main/Assets/Scripts/Design%20Patterns/Object%20Pooling)
     - [Singleton](https://github.com/utkusever/Game-Development-101/tree/main/Assets/Scripts/Design%20Patterns/Singleton)
