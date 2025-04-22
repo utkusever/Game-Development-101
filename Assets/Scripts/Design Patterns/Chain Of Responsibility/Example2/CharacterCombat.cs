@@ -36,14 +36,17 @@ namespace Design_Patterns.Chain_Of_Responsibility
                 FinalDamage = bleedingEffect.BaseDamage,
                 AttackerData = myData,
             };
+            float baseDmg = 0;
+            var statCalc = new StatCalculatorChainSystem();
+            statCalc.CalculateValue(ref baseDmg);
         }
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                health.GetComponent<IDamageable>().TakeDamage(attackData);
-            }
-        }
+        // private void Update()
+        // {
+        //     if (Input.GetKeyDown(KeyCode.Space))
+        //     {
+        //         health.GetComponent<IDamageable>().TakeDamage(attackData);
+        //     }
+        // }
     }
 }
