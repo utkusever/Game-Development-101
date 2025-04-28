@@ -1,89 +1,74 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-public class Witch : MonoBehaviour
+namespace Design_Patterns.Strategy
 {
-    private ISpellStrategy currentSpell;
-
-    public WitchData witchData = new();
-    [SerializeField] private ShieldSpellSO shieldSpellSO;
-
-    private void Start()
+    public class Witch : MonoBehaviour
     {
-        witchData.Defence = 10;
-        var shieldSpell = new ShieldSpellStrategy(witchData, shieldSpellSO);
-        var spellContext = new SpellContext();
-        ChangeSpell(shieldSpell);
-        CastSpell();
+        private ISpellStrategy currentSpell;
+
+        private void Start()
+        {
+            var speller = new Speller(this.transform);
+            speller.ChangeSpell(new ShieldSpell());
+            speller.CastSpell();
+            speller.ChangeSpell(new ImmuneSpell());
+            speller.CastSpell();
+        }
     }
 
-    public void ChangeSpell(ISpellStrategy spellStrategy)
+// it can be abstract class scriptable object etc. main focus is common method
+    public interface ISpellStrategy
     {
-        currentSpell = spellStrategy;
+        void Cast(Transform ownerTransform);
     }
 
-    public void CastSpell()
+    public class ShieldSpell : ISpellStrategy
     {
-        currentSpell?.Cast(this.transform);
-    }
-}
-
-[System.Serializable]
-public class WitchData
-{
-    public float Defence;
-}
-
-public class SpellContext
-{
-    //public AnimationController AnimationController { get; }
-    public Transform ownerTransform { get; }
-    public WitchData WitchData { get; }
-    public Spell Spell;
-}
-
-public interface ISpellStrategy
-{
-    void Cast(Transform ownerTransform);
-}
-
-public class Spell : ScriptableObject,ISpellStrategy
-{
-    [SerializeField] protected ParticleSystem particleSystem;
-
-    public virtual void Cast(Transform ownerTransform)
-    {
-    }
-}
-
-public class ShieldSpellStrategy : ISpellStrategy
-{
-    private WitchData witchData;
-    private Spell spell;
-
-    public ShieldSpellStrategy(WitchData witchData, Spell spell)
-    {
-        this.witchData = witchData;
-        this.spell = spell;
+        public void Cast(Transform ownerTransform)
+        {
+            Debug.Log("Shield Spell Instantiated etc.");
+        }
     }
 
-    public void Cast(Transform ownerTransform)
+    public class ImmuneSpell : ISpellStrategy
     {
-        witchData.Defence += 10;
-        spell.Cast(ownerTransform);
+        public void Cast(Transform ownerTransform)
+        {
+            Debug.Log("Immune Spell Activated for 5 sec. etc.");
+        }
     }
-}
 
-[CreateAssetMenu(menuName = "Spells/Create ShieldSpell", fileName = "ShieldSpell", order = 0)]
-public class ShieldSpellSO : Spell
-{
-    [SerializeField] private float duration;
-
-    public override void Cast(Transform ownerTransform)
+    public class Speller
     {
-        var shieldGo = Instantiate(particleSystem, ownerTransform);
-        Destroy(shieldGo, duration);
+        private ISpellStrategy currentSpell;
+        private Transform ownerTransform;
+
+        public Speller(Transform transform)
+        {
+            ownerTransform = transform;
+        }
+
+        public void ChangeSpell(ISpellStrategy spellStrategy)
+        {
+            currentSpell = spellStrategy;
+        }
+
+        public void CastSpell()
+        {
+            currentSpell?.Cast(ownerTransform);
+        }
+    }
+
+    [CreateAssetMenu(menuName = "Create Spell", fileName = "Spell", order = 0)]
+    public class SpellSO : ScriptableObject, ISpellStrategy
+    {
+        [SerializeField] protected ParticleSystem particleSystem;
+        [SerializeField] private float duration;
+
+        public virtual void Cast(Transform ownerTransform)
+        {
+            var shieldGo = Instantiate(particleSystem, ownerTransform);
+            Destroy(shieldGo, duration);
+        }
     }
 }
