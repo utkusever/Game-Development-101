@@ -28,6 +28,8 @@ Contents
     - [Composite](https://github.com/utkusever/Game-Development-101/blob/main/Assets/Scripts/Design%20Patterns/Composite/Inventory.cs)
     - [Command](https://github.com/utkusever/Game-Development-101/tree/main/Assets/Scripts/Design%20Patterns/Command)
     - [Chain Of Responsibility](https://github.com/utkusever/Game-Development-101/tree/main/Assets/Scripts/Design%20Patterns/Chain%20Of%20Responsibility)
+    - [Strategy](https://github.com/utkusever/Game-Development-101/blob/main/Assets/Scripts/Design%20Patterns/Strategy/Witch.cs)
+
 
  
 - Data Types
